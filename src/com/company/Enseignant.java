@@ -1,17 +1,12 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Enseignant {
+public class Enseignant extends Personne{
     private boolean responsableDepartement;
-    private String nom;
-    private String preNom;
-    private String tel;
-    private String mail;
-    private Date debutFonction;
-    private String grade;
-
     private ArrayList<Matiere> matieres;
 
+    public Enseignant(String nom, String preNom, String tel, String mail, String grade) {
+        super(nom, preNom, tel, mail, grade);
+    }
 }
