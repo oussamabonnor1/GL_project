@@ -2,10 +2,18 @@ package com.company;
 
 public class Departement {
     private String nom;
-    private Enseignant[] enseignants;
-    private Matiere[] matieres;
-    private SalleCours[] salleCours;
-    private Etudiant[] etudiants;
+    public Enseignant[] enseignants;
+    public Matiere[] matieres;
+    public SalleCours[] salleCours;
+    public Etudiant[] etudiants;
+
+    public Departement(String nom, Enseignant[] enseignants, Matiere[] matieres, SalleCours[] salleCours, Etudiant[] etudiants) {
+        this.nom = nom;
+        this.enseignants = enseignants;
+        this.matieres = matieres;
+        this.salleCours = salleCours;
+        this.etudiants = etudiants;
+    }
 
     public String getNom() {
         return nom;
@@ -13,6 +21,19 @@ public class Departement {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void affficherEnseignantGrade(){
+        System.out.println("---Les Enseignants du departement "+getNom()+"---");
+        String[] grade = {"Assistant", "Maitre assistant", "Chargé de cours", "Maire de conference A", "Maire de conference B", "Proffesseur"};
+        for (int i = 0; i < grade.length; i++) {
+            System.out.println("Les "+grade[i]);
+            for (int j = 0; j < enseignants.length; j++) {
+                if(grade[i].matches(enseignants[j].getGrade())){
+                    System.out.println("-"+enseignants[j].getNom());
+                }
+            }
+        }
     }
 
     public void afficherChefDepartement() {
@@ -24,17 +45,7 @@ public class Departement {
         }
     }
 
-    public void afficherCours(String teacher) {
-        Enseignant enseignant = null;
-        for (int i = 0; i < enseignants.length; i++) {
-            if (enseignants[i].getNom().matches(teacher)) {
-                enseignant = enseignants[i];
-                break;
-            }
-        }
-        if (enseignant == null) {
-            System.out.println("Warning: Cette enseignant n'est pas listé !");
-        } else {
+    public void afficherCours(Enseignant enseignant) {
             System.out.println("Les Cours dispensés pour Mr." + enseignant.getNom());
             for (int i = 0; i < matieres.length; i++) {
                 for (int j = 0; j < enseignant.getMatieres().size(); j++) {
@@ -44,9 +55,8 @@ public class Departement {
                 }
             }
         }
-    }
 
-    public void afficherEnseigants() {
+    public void afficherEnseigantsAncienté() {
         System.out.println("Les enseignants du departement: " + getNom());
         Enseignant[] save = enseignants.clone();
         int minYear = enseignants[0].getDateDebut();

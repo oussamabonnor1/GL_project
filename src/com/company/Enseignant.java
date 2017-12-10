@@ -24,7 +24,8 @@ public class Enseignant extends Personne{
         return matieres;
     }
 
-    public void setMatieres(Matiere matieres) {
+    public void addMatieres(Matiere matieres) {
+        matieres.getEnseignants().add(this);
         this.matieres.add(matieres);
     }
 

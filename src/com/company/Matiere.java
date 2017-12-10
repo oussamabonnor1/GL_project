@@ -9,6 +9,19 @@ public class Matiere {
     private ArrayList<Etudiant> etudiants;
     private Note note;
 
+    public Matiere(String nom, SalleCours salleCours) {
+        this.nom = nom;
+        this.salleCours = salleCours;
+    }
+
+    public ArrayList<Enseignant> getEnseignants() {
+        return enseignants;
+    }
+
+    public ArrayList<Etudiant> getEtudiants() {
+        return etudiants;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -37,7 +50,7 @@ public class Matiere {
             }
             s += etudiants.get(i).getMatieres().get(index).getNote().getNote();
         }
-        System.out.println(s);
+        System.out.println(String.format(".02%f",s/etudiants.size()));
     }
 
 }
