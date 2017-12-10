@@ -12,6 +12,22 @@ public class Enseignant extends Personne{
         this.dateDebut = dateDebut;
     }
 
+    public int getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(int dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public ArrayList<Matiere> getMatieres() {
+        return matieres;
+    }
+
+    public void setMatieres(Matiere matieres) {
+        this.matieres.add(matieres);
+    }
+
     public void afficherGrade(){
         System.out.println("Grade de Mr."+getNom()+" est "+getGrade());
     }
@@ -23,4 +39,5 @@ public class Enseignant extends Personne{
     public void setResponsableDepartement(boolean responsableDepartement) {
         this.responsableDepartement = responsableDepartement;
     }
+
 }
