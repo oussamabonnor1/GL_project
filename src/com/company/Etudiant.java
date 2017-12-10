@@ -10,7 +10,7 @@ public class Etudiant {
     private String preNom;
     private String tel;
     private String mail;
-    private Date debutFonction;
+    private Date debutEtude;
     private String grade; //TODO: add a list of grades here
-    
+
 }
