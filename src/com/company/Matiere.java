@@ -7,6 +7,7 @@ public class Matiere {
     private ArrayList<Enseignant> enseignants;
     private SalleCours salleCours;
     private ArrayList<Etudiant> etudiants;
+    private Note note;
 
     public String getNom() {
         return nom;
@@ -14,5 +15,17 @@ public class Matiere {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
+    }
+
+    public void moyenneMatiere(){
+
     }
 }
