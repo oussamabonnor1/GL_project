@@ -25,7 +25,19 @@ public class Matiere {
         this.note = note;
     }
 
-    public void moyenneMatiere(){
-
+    public void moyenneMatiere() {
+        System.out.print("La moyenne de la matiere: " + getNom() + " est: ");
+        float s = 0;
+        for (int i = 0; i < etudiants.size(); i++) {
+            int index = 0;
+            for (int j = 0; j < etudiants.get(i).getMatieres().size(); j++) {
+                if (getNom().matches(etudiants.get(i).getMatieres().get(j).getNom())) {
+                    index = j;
+                }
+            }
+            s += etudiants.get(i).getMatieres().get(index).getNote().getNote();
+        }
+        System.out.println(s);
     }
+
 }

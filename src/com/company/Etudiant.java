@@ -11,6 +11,14 @@ public class Etudiant extends Personne{
         this.debutAnnee = debutAnnee;
     }
 
+    public ArrayList<Matiere> getMatieres() {
+        return matieres;
+    }
+
+    public int getDebutAnnee() {
+        return debutAnnee;
+    }
+
     public float moyenneEtudiant(){
         float s =0;
         for (int i = 0; i < matieres.size(); i++) {
@@ -26,5 +34,12 @@ public class Etudiant extends Personne{
         }
         System.out.println();
         System.out.println(moyenneEtudiant());
+    }
+
+    public void afficherMatieresSansNotes(){
+        System.out.println("Les matiere de l'etudiant: "+getNom());
+        for (int i = 0; i < matieres.size(); i++) {
+            System.out.println("-"+matieres.get(i).getNom());
+        }
     }
 }

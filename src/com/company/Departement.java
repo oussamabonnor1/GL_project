@@ -5,6 +5,7 @@ public class Departement {
     private Enseignant[] enseignants;
     private Matiere[] matieres;
     private SalleCours[] salleCours;
+    private Etudiant[] etudiants;
 
     public String getNom() {
         return nom;
@@ -48,7 +49,6 @@ public class Departement {
     public void afficherEnseigants() {
         System.out.println("Les enseignants du departement: " + getNom());
         Enseignant[] save = enseignants.clone();
-        Enseignant[] temp = new Enseignant[enseignants.length];
         int minYear = enseignants[0].getDateDebut();
         int j;
         for (int k = 0; k < save.length; k++) {
@@ -67,7 +67,6 @@ public class Departement {
     public void afficherSalles() {
         System.out.println("Les salles du departement: " + getNom());
         SalleCours[] save = salleCours.clone();
-        SalleCours[] temp = new SalleCours[salleCours.length];
         int minYear = salleCours[0].getCapacity();
         int j;
         for (int k = 0; k < save.length; k++) {
@@ -80,6 +79,27 @@ public class Departement {
             }
             System.out.println("-" + save[j]);
             save[j].setCapacity(Integer.MAX_VALUE);
+        }
+    }
+
+    public void afficherEtudiantParMoyenne() {
+        System.out.println("Le Classement de La matiere: " + getNom());
+        float[] moyenne = new float[etudiants.length];
+        for (int k = 0; k < moyenne.length; k++) {
+            moyenne[k] = etudiants[k].moyenneEtudiant();
+        }
+
+        for (int k = 0; k < moyenne.length; k++) {
+            float max = 0;
+            int index = 0;
+            for (int i = 0; i < moyenne.length; i++) {
+                if (moyenne[i] > max) {
+                    index = i;
+                    max = moyenne[i];
+                }
+            }
+            System.out.println("-" + etudiants[index].getNom() + " Avec " + moyenne[index]);
+            moyenne[index] = Float.MAX_VALUE;
         }
     }
 }
