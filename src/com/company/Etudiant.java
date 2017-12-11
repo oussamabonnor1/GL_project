@@ -25,7 +25,7 @@ public class Etudiant extends Personne {
         this.matieres.add(matieres);
     }
 
-    public void setNote(float note, int index){
+    public void setNote(float note, int index) {
         matieres.get(index).setNote(new Note(note));
     }
 
@@ -40,10 +40,10 @@ public class Etudiant extends Personne {
     public void afficherNoteEtMoyenne() {
         System.out.print("Les notes de l'etudiant: " + getNom() + " sont: ");
         for (int i = 0; i < matieres.size(); i++) {
-            System.out.print(", " + matieres.get(i).getNote().getNote());
+            System.out.print(", " + matieres.get(i).getNote().getNote() + " (" + matieres.get(i).getNom() + ")");
         }
         System.out.println();
-        System.out.println("La moyenne est: "+ String.format("%.2f",moyenneEtudiant()));
+        System.out.println("La moyenne est: " + String.format("%.2f", moyenneEtudiant()));
     }
 
     public void afficherMatieresSansNotes() {

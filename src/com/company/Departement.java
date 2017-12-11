@@ -22,19 +22,19 @@ public class Departement {
         return nom;
     }
 
-    public void affficherEnseignantGrade(){
-        System.out.println("---Les Enseignants du departement "+getNom()+"---");
+    public void affficherEnseignantGrade() {
+        System.out.println("---Les Enseignants du departement " + getNom() + "---");
         String[] grade = {"Assistant", "Maitre assistant", "Chargé de cours", "Maire de conference A", "Maire de conference B", "Proffesseur"};
         for (int i = 0; i < grade.length; i++) {
-            System.out.print("Les "+grade[i]+": ");
+            System.out.print("Les " + grade[i] + ": ");
             boolean found = false;
             for (int j = 0; j < enseignants.length; j++) {
-                if(grade[i].matches(enseignants[j].getGrade())){
+                if (grade[i].matches(enseignants[j].getGrade())) {
                     found = true;
-                    System.out.print(enseignants[j].getNom()+", ");
+                    System.out.print(enseignants[j].getNom() + ", ");
                 }
             }
-            if(!found) System.out.println("Aucun.");
+            if (!found) System.out.println("Aucun.");
             else System.out.println();
         }
     }
@@ -49,15 +49,12 @@ public class Departement {
     }
 
     public void afficherCours(Enseignant enseignant) {
-            System.out.println("Les Cours dispensés pour Mr." + enseignant.getNom());
-            for (int i = 0; i < matieres.length; i++) {
-                for (int j = 0; j < enseignant.getMatieres().size(); j++) {
-                    if (enseignant.getMatieres().get(j).getNom().matches(matieres[i].getNom())) {
-                        System.out.println("-" + matieres[i].getNom());
-                    }
-                }
-            }
+        System.out.println("Les Cours dispensés pour Mr." + enseignant.getNom());
+        for (int j = 0; j < enseignant.getMatieres().size(); j++) {
+            System.out.println("-" + enseignant.getMatieres().get(j).getNom());
         }
+
+    }
 
     public void afficherEnseigantsAncienté() {
         System.out.println("Les enseignants du departement: " + getNom());
@@ -66,14 +63,14 @@ public class Departement {
         int j;
         for (int k = 0; k < save.length; k++) {
             j = 0;
-            minYear = Integer.MAX_VALUE-1;
+            minYear = Integer.MAX_VALUE - 1;
             for (int i = 0; i < save.length; i++) {
                 if (save[i].getDateDebut() < minYear) {
                     minYear = save[i].getDateDebut();
                     j = i;
                 }
             }
-            System.out.println("-" + save[j].getNom());
+            System.out.println("-" + save[j].getNom() + " (" + save[j].getDateDebut() + ")");
             save[j].setDateDebut(Integer.MAX_VALUE);
         }
     }
@@ -92,13 +89,13 @@ public class Departement {
                     j = i;
                 }
             }
-            System.out.println("-" + save[j].getNumSalle());
+            System.out.println("-" + save[j].getNumSalle() + " (" + save[j].getCapacity() + ")");
             save[j].setCapacity(Integer.MAX_VALUE);
         }
     }
 
     public void afficherEtudiantParMoyenne() {
-        System.out.println("Le Classement ddans le departement: " + getNom());
+        System.out.println("Le Classement dans le departement: " + getNom());
         float[] moyenne = new float[etudiants.length];
         for (int k = 0; k < moyenne.length; k++) {
             moyenne[k] = etudiants[k].moyenneEtudiant();

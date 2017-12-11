@@ -47,11 +47,17 @@ public class SalleCours {
         return index > 4;
     }
 
-    public void annulerReservation(Enseignant enseignant) {
+    public void annulerReservation(Date date) {
         if (filsAttente.size() > 0) {
-            filsAttente.remove(enseignant.getNom());
+            filsAttente.remove(date);
         } else {
             System.out.println("fils de reservation de de la salle " + getNumSalle() + " est VIDE !");
         }
+    }
+
+    public void imprimerFiche(){
+        System.out.println("Fiche Signalitique de la salle "+getNumSalle());
+        System.out.println("Capacité: "+getCapacity());
+        System.out.println("La file d'attente est: "+filsAttente.toString());
     }
 }

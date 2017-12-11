@@ -49,9 +49,14 @@ public class Main {
     public static void afficherMenuEcole(Ecole e) {
         System.out.println("Menu De l'ecole (Choix d'option par choix de numero)");
         e.afficherDepartemens();
+        System.out.println("Pour Quitter clickez sur 0");
         System.out.println("Veillez choissir un departement: ");
         Scanner sc = new Scanner(System.in);
         int index = sc.nextInt();
+        if (index == 0) {
+            System.out.println("Bye !");
+            System.exit(0);
+        }
         afficherMenu(e.departements[index - 1], e);
     }
 
@@ -73,7 +78,8 @@ public class Main {
             System.out.println("10)-Afficher le Grade pour un enseigant");
             System.out.println("11)-Résever une salle pour un enseigant");
             System.out.println("12)-Annuler la reservation d'une salle pour un enseigant");
-            System.out.println("13)-Quitter...");
+            System.out.println("13)-Afficher des infos sur ce departement");
+            System.out.println("14)-Quitter...");
             System.out.println();
             i = sc.nextInt();
             switch (i) {
@@ -116,7 +122,7 @@ public class Main {
                     int n2 = sc.nextInt();
                     d.matieres[n2 - 1].moyenneMatiere();
                     break;
-                case 9:
+                case 10:
                     System.out.println("Veillez Choissir un prof: ");
                     for (int e = 0; e < d.enseignants.length; e++) {
                         System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
@@ -124,7 +130,7 @@ public class Main {
                     int index6 = sc.nextInt();
                     d.enseignants[index6 - 1].afficherGrade();
                     break;
-                case 10:
+                case 9:
                     System.out.println("Veillez selectionner un étudiant:");
                     for (int e = 0; e < d.etudiants.length; e++) {
                         System.out.println((e + 1) + ")-" + d.etudiants[e].getNom());
@@ -146,20 +152,22 @@ public class Main {
                     d.salleCours[index3 - 1].reserverSalle(new Date(2017, month, day));
                     break;
                 case 12:
-                    System.out.println("Veillez Choissir un prof: ");
-                    for (int e = 0; e < d.enseignants.length; e++) {
-                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
-                    }
-                    int index4 = sc.nextInt();
-
+                    System.out.println("Veillez entrer une date");
+                    System.out.print("jour:");
+                    int day2 = sc.nextInt();
+                    System.out.print("mois:");
+                    int month2 = sc.nextInt();
                     System.out.println("Veillez Choissir une Salle: ");
                     for (int e = 0; e < d.salleCours.length; e++) {
                         System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
                     }
                     int index5 = sc.nextInt();
-                    d.salleCours[index5 - 1].annulerReservation(d.enseignants[index4 - 1]);
+                    d.salleCours[index5 - 1].annulerReservation(new Date(2017,month2,day2));
                     break;
                 case 13:
+                    infoDesObjets(d, ecole);
+                    break;
+                case 14:
                     afficherMenuEcole(ecole);
                     break;
                 default:
@@ -172,6 +180,56 @@ public class Main {
                 Thread.sleep(2500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public static void infoDesObjets(Departement d, Ecole ecole) {
+
+        int i = 0;
+        while (i < 6) {
+            System.out.println("---Menu Des infos des enseigants (Choix d'option par choix de numero)---");
+            System.out.println("Veillez choisir quelq'un pour inspecter");
+            System.out.println("1)-Enseignants\n)2-Etudiants\n3)-Salles\n4)-Matieres\n5)-Retour...");
+            Scanner sc = new Scanner(System.in);
+            i = sc.nextInt();
+            int index;
+            switch (i) {
+                case 1:
+                    System.out.println("Veillez Choissir un prof: ");
+                    for (int e = 0; e < d.enseignants.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
+                    }
+                    index = sc.nextInt();
+                    d.enseignants[index - 1].imprimerFiche();
+                    break;
+                case 2:
+                    System.out.println("Veillez Choissir un Etudiant: ");
+                    for (int e = 0; e < d.etudiants.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.etudiants[e].getNom());
+                    }
+                    index = sc.nextInt();
+                    d.etudiants[index - 1].imprimerFiche();
+                    break;
+                case 3:
+                    System.out.println("Veillez Choissir une Salle: ");
+                    for (int e = 0; e < d.salleCours.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
+                    }
+                    index = sc.nextInt();
+                    d.salleCours[index - 1].imprimerFiche();
+                    break;
+                case 4:
+                    System.out.println("Veillez Choissir une Matiére: ");
+                    for (int e = 0; e < d.matieres.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.matieres[e].getNom());
+                    }
+                    index = sc.nextInt();
+                    d.matieres[index - 1].imprimerFiche();
+                    break;
+                case 5:
+                    afficherMenuEcole(ecole);
+                    break;
             }
         }
     }

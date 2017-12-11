@@ -56,4 +56,9 @@ public class Matiere {
         System.out.println(String.format("%.2f", s / (float) etudiants.size()));
     }
 
+    public void imprimerFiche(){
+        System.out.println("Fiche Signalitique de la Matiere: "+getNom());
+        //System.out.println("Capacité: "+getCapacity());
+        //System.out.println("La file d'attente est: "+filsAttente.toString());
+    }
 }
