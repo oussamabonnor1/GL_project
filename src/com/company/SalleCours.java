@@ -28,12 +28,10 @@ public class SalleCours {
     }
 
     public void reserverSalle(Date date) {
-        if (filsAttente.size() < 4) {
-            if (!dateTaken(date)) filsAttente.add(date);
-            else System.out.println("Liste saturé pour cette date");
-        } else {
-            System.out.println("fils de reservation de de la salle " + getNumSalle() + " est saturée.");
+        if (!dateTaken(date)) {
+            filsAttente.add(date);
         }
+        else System.out.println("Liste saturé pour cette date");
     }
 
     private boolean dateTaken(Date date) {
@@ -55,9 +53,13 @@ public class SalleCours {
         }
     }
 
-    public void imprimerFiche(){
-        System.out.println("Fiche Signalitique de la salle "+getNumSalle());
-        System.out.println("Capacité: "+getCapacity());
-        System.out.println("La file d'attente est: "+filsAttente.toString());
+    public void imprimerFiche() {
+        System.out.println("Fiche Signalitique de la salle " + getNumSalle());
+        System.out.println("Capacité: " + getCapacity());
+        System.out.print("la File d'attente est: ");
+        for (int i = 0; i < filsAttente.size(); i++) {
+            System.out.print(",(" + String.format("%02d", filsAttente.get(i).getDate()) + "/" + String.format("%02d", filsAttente.get(i).getMonth()) + "/2017)");
+        }
+        System.out.println();
     }
 }

@@ -162,7 +162,7 @@ public class Main {
                         System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
                     }
                     int index5 = sc.nextInt();
-                    d.salleCours[index5 - 1].annulerReservation(new Date(2017,month2,day2));
+                    d.salleCours[index5 - 1].annulerReservation(new Date(2017, month2, day2));
                     break;
                 case 13:
                     infoDesObjets(d, ecole);
