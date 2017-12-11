@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class Main {
             int n = r.nextInt(3) + 1;
             for (int j = 0; j < n; j++) {
                 etudiants[i].addMatieres(matieres[j]);
+                etudiants[i].setNote(r.nextInt(20) + 1, j);
             }
         }
 
@@ -47,6 +49,7 @@ public class Main {
         int i = 0;
         Scanner sc = new Scanner(System.in);
         while (i != 13) {
+            System.out.println();
             System.out.println("1)-Afficher les Enseignants par Grade");
             System.out.println("2)-Afficher les Departements d'une ecole");
             System.out.println("3)-Afficher un Chef de Departement");
@@ -60,6 +63,7 @@ public class Main {
             System.out.println("11)-Résever une salle pour un enseigant");
             System.out.println("12)-Annuler la reservation d'une salle pour un enseigant");
             System.out.println("13)-Quitter...");
+            System.out.println();
             i = sc.nextInt();
             switch (i) {
                 case 1:
@@ -120,13 +124,30 @@ public class Main {
                     int index2 = sc.nextInt();
 
                     System.out.println("Veillez Choissir une Salle: ");
+                    for (int e = 0; e < d.salleCours.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
+                    }
+                    int index3 = sc.nextInt();
+                    System.out.println("Veillez entrer une date");
+                    System.out.print("jour:");
+                    int day = sc.nextInt();
+                    System.out.print("mois:");
+                    int month = sc.nextInt();
+                    d.salleCours[index3 - 1].reserverSalle(d.enseignants[index2 - 1], new Date(2017, month, day));
+                    break;
+                case 12:
+                    System.out.println("Veillez Choissir un prof: ");
                     for (int e = 0; e < d.enseignants.length; e++) {
                         System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
                     }
-                    int index2 = sc.nextInt();
+                    int index4 = sc.nextInt();
 
-                    break;
-                case 12:
+                    System.out.println("Veillez Choissir une Salle: ");
+                    for (int e = 0; e < d.salleCours.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
+                    }
+                    int index5 = sc.nextInt();
+                    d.salleCours[index5 - 1].annulerReservation(d.enseignants[index4 - 1]);
                     break;
                 default:
                     System.out.println("Bye !");
@@ -135,7 +156,7 @@ public class Main {
             }
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

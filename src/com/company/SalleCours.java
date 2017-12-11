@@ -29,7 +29,8 @@ public class SalleCours {
 
     public void reserverSalle(Enseignant enseignant, Date date) {
         if (filsAttente.size() < 4) {
-            filsAttente.put(enseignant.getNom(), date);
+            if (!filsAttente.containsValue(date)) filsAttente.put(enseignant.getNom(), date);
+            else System.out.println("Cette date est deja prise !");
         } else {
             System.out.println("fils de reservation de de la salle " + getNumSalle() + " est saturée.");
         }

@@ -9,6 +9,7 @@ public class Etudiant extends Personne {
     public Etudiant(String nom, String preNom, String tel, String mail, int debutAnnee) {
         super(nom, preNom, tel, mail, "Etudiant");
         this.debutAnnee = debutAnnee;
+        matieres = new ArrayList<>();
     }
 
     public ArrayList<Matiere> getMatieres() {
@@ -24,12 +25,16 @@ public class Etudiant extends Personne {
         this.matieres.add(matieres);
     }
 
+    public void setNote(float note, int index){
+        matieres.get(index).setNote(new Note(note));
+    }
+
     public float moyenneEtudiant() {
         float s = 0;
         for (int i = 0; i < matieres.size(); i++) {
             s += matieres.get(i).getNote().getNote();
         }
-        return s / matieres.size();
+        return s / (float) matieres.size();
     }
 
     public void afficherNoteEtMoyenne() {
@@ -38,7 +43,7 @@ public class Etudiant extends Personne {
             System.out.print(", " + matieres.get(i).getNote().getNote());
         }
         System.out.println();
-        System.out.println(moyenneEtudiant());
+        System.out.println("La moyenne est: "+ String.format("%.2f",moyenneEtudiant()));
     }
 
     public void afficherMatieresSansNotes() {

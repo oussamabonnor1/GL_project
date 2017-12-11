@@ -12,6 +12,9 @@ public class Matiere {
     public Matiere(String nom, SalleCours salleCours) {
         this.nom = nom;
         this.salleCours = salleCours;
+        etudiants = new ArrayList<>();
+        enseignants = new ArrayList<>();
+        note = new Note(0);
     }
 
     public ArrayList<Enseignant> getEnseignants() {
@@ -50,7 +53,7 @@ public class Matiere {
             }
             s += etudiants.get(i).getMatieres().get(index).getNote().getNote();
         }
-        System.out.println(String.format(".02%f",s/etudiants.size()));
+        System.out.println(String.format("%.2f", s / (float) etudiants.size()));
     }
 
 }

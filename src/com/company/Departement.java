@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Random;
+
 public class Departement {
     private String nom;
     public Enseignant[] enseignants;
@@ -13,26 +15,27 @@ public class Departement {
         this.matieres = matieres;
         this.salleCours = salleCours;
         this.etudiants = etudiants;
+        enseignants[new Random().nextInt(enseignants.length)].setResponsableDepartement(true);
     }
 
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public void affficherEnseignantGrade(){
         System.out.println("---Les Enseignants du departement "+getNom()+"---");
         String[] grade = {"Assistant", "Maitre assistant", "Chargé de cours", "Maire de conference A", "Maire de conference B", "Proffesseur"};
         for (int i = 0; i < grade.length; i++) {
-            System.out.println("Les "+grade[i]);
+            System.out.print("Les "+grade[i]+": ");
+            boolean found = false;
             for (int j = 0; j < enseignants.length; j++) {
                 if(grade[i].matches(enseignants[j].getGrade())){
-                    System.out.println("-"+enseignants[j].getNom());
+                    found = true;
+                    System.out.print(enseignants[j].getNom()+", ");
                 }
             }
+            if(!found) System.out.println("Aucun.");
+            else System.out.println();
         }
     }
 
@@ -58,42 +61,44 @@ public class Departement {
 
     public void afficherEnseigantsAncienté() {
         System.out.println("Les enseignants du departement: " + getNom());
-        Enseignant[] save = enseignants.clone();
-        int minYear = enseignants[0].getDateDebut();
+        Enseignant[] save = enseignants;
+        int minYear;
         int j;
         for (int k = 0; k < save.length; k++) {
             j = 0;
+            minYear = Integer.MAX_VALUE-1;
             for (int i = 0; i < save.length; i++) {
                 if (save[i].getDateDebut() < minYear) {
                     minYear = save[i].getDateDebut();
                     j = i;
                 }
             }
-            System.out.println("-" + save[k]);
+            System.out.println("-" + save[j].getNom());
             save[j].setDateDebut(Integer.MAX_VALUE);
         }
     }
 
     public void afficherSalles() {
         System.out.println("Les salles du departement: " + getNom());
-        SalleCours[] save = salleCours.clone();
-        int minYear = salleCours[0].getCapacity();
+        SalleCours[] save = salleCours;
+        int minYear;
         int j;
         for (int k = 0; k < save.length; k++) {
             j = 0;
+            minYear = Integer.MAX_VALUE - 1;
             for (int i = 0; i < save.length; i++) {
                 if (save[i].getCapacity() < minYear) {
                     minYear = save[i].getCapacity();
                     j = i;
                 }
             }
-            System.out.println("-" + save[j]);
+            System.out.println("-" + save[j].getNumSalle());
             save[j].setCapacity(Integer.MAX_VALUE);
         }
     }
 
     public void afficherEtudiantParMoyenne() {
-        System.out.println("Le Classement de La matiere: " + getNom());
+        System.out.println("Le Classement ddans le departement: " + getNom());
         float[] moyenne = new float[etudiants.length];
         for (int k = 0; k < moyenne.length; k++) {
             moyenne[k] = etudiants[k].moyenneEtudiant();
@@ -109,8 +114,7 @@ public class Departement {
                 }
             }
             System.out.println("-" + etudiants[index].getNom() + " Avec " + moyenne[index]);
-            moyenne[index] = Float.MAX_VALUE;
+            moyenne[index] = Float.MIN_VALUE;
         }
     }
 }
-//TODO: fuck up la derniere ligne

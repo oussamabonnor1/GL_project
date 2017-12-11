@@ -10,6 +10,7 @@ public class Enseignant extends Personne{
     public Enseignant(String nom, String preNom, String tel, String mail,int dateDebut, String grade) {
         super(nom, preNom, tel, mail, grade);
         this.dateDebut = dateDebut;
+        matieres = new ArrayList<>();
     }
 
     public int getDateDebut() {
