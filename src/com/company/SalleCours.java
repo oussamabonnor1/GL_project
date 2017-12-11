@@ -1,18 +1,18 @@
 package com.company;
 
+
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SalleCours {
     private int numSalle;
     private int capacity;
-    private Map<String, Date> filsAttente;
+    private ArrayList<Date> filsAttente;
 
     public SalleCours(int numSalle, int capacity) {
         this.numSalle = numSalle;
         this.capacity = capacity;
-        filsAttente = new HashMap<>();
+        filsAttente = new ArrayList<>();
     }
 
     public int getNumSalle() {
@@ -27,13 +27,24 @@ public class SalleCours {
         this.capacity = capacity;
     }
 
-    public void reserverSalle(Enseignant enseignant, Date date) {
+    public void reserverSalle(Date date) {
         if (filsAttente.size() < 4) {
-            if (!filsAttente.containsValue(date)) filsAttente.put(enseignant.getNom(), date);
-            else System.out.println("Cette date est deja prise !");
+            if (!dateTaken(date)) filsAttente.add(date);
+            else System.out.println("Liste saturé pour cette date");
         } else {
             System.out.println("fils de reservation de de la salle " + getNumSalle() + " est saturée.");
         }
+    }
+
+    private boolean dateTaken(Date date) {
+        int index = 0;
+        for (int i = 0; i < filsAttente.size(); i++) {
+            if (filsAttente.get(i).getDay() == date.getDay() &&
+                    filsAttente.get(i).getMonth() == date.getMonth()) {
+                index++;
+            }
+        }
+        return index > 4;
     }
 
     public void annulerReservation(Enseignant enseignant) {

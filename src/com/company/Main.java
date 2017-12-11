@@ -41,25 +41,36 @@ public class Main {
         }
 
         Departement d = new Departement("MI", enseignants, matieres, salleCours, etudiants);
-        afficherMenu(d);
+        Departement d2 = new Departement("Physique", enseignants, matieres, salleCours, etudiants);
+        Ecole ecole = new Ecole("IGMO", new Departement[]{d, d2});
+        afficherMenuEcole(ecole);
     }
 
-    public static void afficherMenu(Departement d) {
+    public static void afficherMenuEcole(Ecole e) {
+        System.out.println("Menu De l'ecole (Choix d'option par choix de numero)");
+        e.afficherDepartemens();
+        System.out.println("Veillez choissir un departement: ");
+        Scanner sc = new Scanner(System.in);
+        int index = sc.nextInt();
+        afficherMenu(e.departements[index - 1], e);
+    }
+
+    public static void afficherMenu(Departement d, Ecole ecole) {
         System.out.println("Menu Du Departement (Choix d'option par choix de numero)");
         int i = 0;
         Scanner sc = new Scanner(System.in);
         while (i != 13) {
             System.out.println();
             System.out.println("1)-Afficher les Enseignants par Grade");
-            System.out.println("2)-Afficher les Departements d'une ecole");
-            System.out.println("3)-Afficher un Chef de Departement");
-            System.out.println("4)-Afficher les cours dispensé par un enseignant");
-            System.out.println("5)-Afficher les Enseignants par ancienté");
-            System.out.println("6)-Afficher les Salles par Capacité");
-            System.out.println("7)-Afficher les Notes/Moyenne d'un étudiant");
-            System.out.println("8)-Afficher le classement des étudiants");
-            System.out.println("9)-Afficher la moyenne d'un cours");
-            System.out.println("10)-Afficher les matiéres pour un étudiant");
+            System.out.println("2)-Afficher un Chef de Departement");
+            System.out.println("3)-Afficher les cours dispensé par un enseignant");
+            System.out.println("4)-Afficher les Enseignants par ancienté");
+            System.out.println("5)-Afficher les Salles par Capacité");
+            System.out.println("6)-Afficher les Notes/Moyenne d'un étudiant");
+            System.out.println("7)-Afficher le classement des étudiants");
+            System.out.println("8)-Afficher la moyenne d'un cours");
+            System.out.println("9)-Afficher les matiéres pour un étudiant");
+            System.out.println("10)-Afficher le Grade pour un enseigant");
             System.out.println("11)-Résever une salle pour un enseigant");
             System.out.println("12)-Annuler la reservation d'une salle pour un enseigant");
             System.out.println("13)-Quitter...");
@@ -70,12 +81,9 @@ public class Main {
                     d.affficherEnseignantGrade();
                     break;
                 case 2:
-
-                    break;
-                case 3:
                     d.afficherChefDepartement();
                     break;
-                case 4:
+                case 3:
                     System.out.println("Veillez Choissir un prof: ");
                     for (int e = 0; e < d.enseignants.length; e++) {
                         System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
@@ -83,13 +91,13 @@ public class Main {
                     int index = sc.nextInt();
                     d.afficherCours(d.enseignants[index - 1]);
                     break;
-                case 5:
+                case 4:
                     d.afficherEnseigantsAncienté();
                     break;
-                case 6:
+                case 5:
                     d.afficherSalles();
                     break;
-                case 7:
+                case 6:
                     System.out.println("Veillez selectionner un étudiant:");
                     for (int e = 0; e < d.etudiants.length; e++) {
                         System.out.println((e + 1) + ")-" + d.etudiants[e].getNom());
@@ -97,16 +105,24 @@ public class Main {
                     int n = sc.nextInt();
                     d.etudiants[n - 1].afficherNoteEtMoyenne();
                     break;
-                case 8:
+                case 7:
                     d.afficherEtudiantParMoyenne();
                     break;
-                case 9:
+                case 8:
                     System.out.println("Veillez selectionner une Matiére:");
                     for (int e = 0; e < d.matieres.length; e++) {
                         System.out.println((e + 1) + ")-" + d.matieres[e].getNom());
                     }
                     int n2 = sc.nextInt();
                     d.matieres[n2 - 1].moyenneMatiere();
+                    break;
+                case 9:
+                    System.out.println("Veillez Choissir un prof: ");
+                    for (int e = 0; e < d.enseignants.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
+                    }
+                    int index6 = sc.nextInt();
+                    d.enseignants[index6 - 1].afficherGrade();
                     break;
                 case 10:
                     System.out.println("Veillez selectionner un étudiant:");
@@ -117,12 +133,6 @@ public class Main {
                     d.etudiants[n3 - 1].afficherMatieresSansNotes();
                     break;
                 case 11:
-                    System.out.println("Veillez Choissir un prof: ");
-                    for (int e = 0; e < d.enseignants.length; e++) {
-                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
-                    }
-                    int index2 = sc.nextInt();
-
                     System.out.println("Veillez Choissir une Salle: ");
                     for (int e = 0; e < d.salleCours.length; e++) {
                         System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
@@ -133,7 +143,7 @@ public class Main {
                     int day = sc.nextInt();
                     System.out.print("mois:");
                     int month = sc.nextInt();
-                    d.salleCours[index3 - 1].reserverSalle(d.enseignants[index2 - 1], new Date(2017, month, day));
+                    d.salleCours[index3 - 1].reserverSalle(new Date(2017, month, day));
                     break;
                 case 12:
                     System.out.println("Veillez Choissir un prof: ");
@@ -148,6 +158,9 @@ public class Main {
                     }
                     int index5 = sc.nextInt();
                     d.salleCours[index5 - 1].annulerReservation(d.enseignants[index4 - 1]);
+                    break;
+                case 13:
+                    afficherMenuEcole(ecole);
                     break;
                 default:
                     System.out.println("Bye !");
