@@ -22,25 +22,31 @@ public class Etudiant extends Personne {
 
     public void addMatieres(Matiere matieres) {
         matieres.getEtudiants().add(this);
-        this.matieres.add(matieres);
+        this.matieres.add(new Matiere(matieres.getNom(), matieres.salleCours));
     }
 
-    public void setNote(float note, int index) {
-        matieres.get(index).setNote(new Note(note));
+    public void setNote(float note) {
+        matieres.get(matieres.size() - 1).setNote(new Note(note));
     }
 
     public float moyenneEtudiant() {
         float s = 0;
+        int d = 0;
         for (int i = 0; i < matieres.size(); i++) {
-            s += matieres.get(i).getNote().getNote();
+            if (matieres.get(i).getNote() != null) {
+                d++;
+                s += matieres.get(i).getNote().getNote();
+            }
         }
-        return s / (float) matieres.size();
+        return s / (float) d;
     }
 
     public void afficherNoteEtMoyenne() {
         System.out.print("Les notes de l'etudiant: " + getNom() + " sont: ");
         for (int i = 0; i < matieres.size(); i++) {
-            System.out.print(", " + matieres.get(i).getNote().getNote() + " (" + matieres.get(i).getNom() + ")");
+            if (matieres.get(i).getNote() != null)
+                System.out.print(", " + matieres.get(i).getNote().getNote() + " (" + matieres.get(i).getNom() + ")");
+            else System.out.print(",Pas Noté " + " (" + matieres.get(i).getNom() + ")");
         }
         System.out.println();
         System.out.println("La moyenne est: " + String.format("%.2f", moyenneEtudiant()));
@@ -49,7 +55,7 @@ public class Etudiant extends Personne {
     public void afficherMatieresSansNotes() {
         System.out.println("Les matiere de l'etudiant: " + getNom());
         for (int i = 0; i < matieres.size(); i++) {
-            System.out.println("-" + matieres.get(i).getNom());
+            if (matieres.get(i).getNote() == null) System.out.println("-" + matieres.get(i).getNom());
         }
     }
 }

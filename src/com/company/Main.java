@@ -9,36 +9,67 @@ public class Main {
     public static void main(String[] args) {
         //Initialisation:
         Random r = new Random();
-        SalleCours[] salleCours = new SalleCours[3];
-        for (int i = 0; i < 3; i++) {
+        SalleCours[] salleCours = new SalleCours[5];
+        for (int i = 0; i < 5; i++) {
             salleCours[i] = new SalleCours((200 + i), r.nextInt(10) + 20);
         }
+        salleCours[3].setCapacity(100);
 
-        Matiere[] matieres = new Matiere[3];
+        Matiere[] matieres = new Matiere[5];
         matieres[0] = new Matiere("Math", salleCours[0]);
         matieres[1] = new Matiere("Info", salleCours[1]);
-        matieres[2] = new Matiere("Something else", salleCours[2]);
+        matieres[2] = new Matiere("Physique", salleCours[2]);
+        matieres[3] = new Matiere("Chimie", salleCours[3]);
+        matieres[4] = new Matiere("Biologie", salleCours[4]);
 
-        Etudiant[] etudiants = new Etudiant[3];
-        for (int i = 0; i < 3; i++) {
-            etudiants[i] = new Etudiant("moh " + (i + 1), "mih", "055115" + r.nextInt(100), "emil@moh" + (i + 1), 2017 - r.nextInt(10));
-            int n = r.nextInt(3) + 1;
-            for (int j = 0; j < n; j++) {
-                etudiants[i].addMatieres(matieres[j]);
-                etudiants[i].setNote(r.nextInt(20) + 1, j);
-            }
-        }
+        Etudiant[] etudiants = new Etudiant[5];
+        //section etudiant
+        etudiants[0] = new Etudiant("moh 1", "mih 1", "055115155", "emil@moh1", 2002);
+        etudiants[1] = new Etudiant("moh 2", "mih 2", "055115177", "emil@moh2", 1999);
+        etudiants[2] = new Etudiant("moh 3", "mih 3", "055115158", "emil@moh3", 2008);
+        etudiants[3] = new Etudiant("moh 4", "mih 4", "055115159", "emil@moh4", 2009);
+        etudiants[4] = new Etudiant("moh 5", "mih 5", "0551151511", "emil@moh5", 2011);
 
-        Enseignant[] enseignants = new Enseignant[3];
+        etudiants[0].addMatieres(matieres[0]);
+        etudiants[0].addMatieres(matieres[1]);
+        etudiants[0].addMatieres(matieres[3]);
+        etudiants[0].setNote(15);
+        etudiants[1].addMatieres(matieres[0]);
+        etudiants[1].setNote(20);
+        etudiants[2].addMatieres(matieres[2]);
+        etudiants[2].setNote(3);
+        etudiants[3].addMatieres(matieres[3]);
+        etudiants[4].addMatieres(matieres[4]);
+        etudiants[4].setNote(11);
+        etudiants[4].addMatieres(matieres[3]);
+        etudiants[4].setNote(17);
+
+
+        Enseignant[] enseignants = new Enseignant[7];
         String[] grade = {"Assistant", "Maitre assistant", "Chargé de cours", "Maire de conference A", "Maire de conference B", "Proffesseur"};
 
-        for (int i = 0; i < 3; i++) {
-            enseignants[i] = new Enseignant("prof " + (i + 1), "pref", "0555051" + r.nextInt(100), "emil@moh" + (i + 1), 2017 - r.nextInt(20), grade[r.nextInt(6)]);
-            int n = r.nextInt(3) + 1;
-            for (int j = 0; j < n; j++) {
-                enseignants[i].addMatieres(matieres[j]);
-            }
-        }
+        //Section enseignant
+        enseignants[0] = new Enseignant("prof " + 1, "pref", "05550511", "emil@moh1", 1975,12,1, grade[0]);
+        enseignants[1] = new Enseignant("prof " + 2, "pref", "05550512", "emil@moh2", 2015,7,8, grade[0]);
+        enseignants[2] = new Enseignant("prof " + 3, "pref", "05550513", "emil@moh3", 2012,9,17, grade[1]);
+        enseignants[3] = new Enseignant("prof " + 4, "pref", "05550514", "emil@moh4", 2010,5,15, grade[2]);
+        enseignants[4] = new Enseignant("prof " + 5, "pref", "05550515", "emil@moh5", 1999,4,12, grade[3]);
+        enseignants[5] = new Enseignant("prof " + 6, "pref", "05550515", "emil@moh5", 1999,6,8, grade[4]);
+        enseignants[6] = new Enseignant("prof " + 7, "pref", "05550515", "emil@moh5", 1999,6,7, grade[5]);
+
+        enseignants[0].addMatieres(matieres[0]);
+        enseignants[0].addMatieres(matieres[1]);
+        enseignants[1].addMatieres(matieres[2]);
+        enseignants[2].addMatieres(matieres[0]);
+        enseignants[2].addMatieres(matieres[1]);
+        enseignants[2].addMatieres(matieres[2]);
+        enseignants[3].addMatieres(matieres[4]);
+        enseignants[3].addMatieres(matieres[3]);
+        enseignants[3].addMatieres(matieres[2]);
+        enseignants[4].addMatieres(matieres[1]);
+        enseignants[4].addMatieres(matieres[0]);
+        enseignants[4].addMatieres(matieres[3]);
+        //End section
 
         Departement d = new Departement("MI", enseignants, matieres, salleCours, etudiants);
         Departement d2 = new Departement("Physique", enseignants, matieres, salleCours, etudiants);
@@ -149,7 +180,13 @@ public class Main {
                     int day = sc.nextInt();
                     System.out.print("mois:");
                     int month = sc.nextInt();
-                    d.salleCours[index3 - 1].reserverSalle(new Date(2017, month, day));
+
+                    System.out.println("Veillez Choissir un prof: ");
+                    for (int e = 0; e < d.enseignants.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
+                    }
+                    int index7 = sc.nextInt();
+                    d.salleCours[index3 - 1].reserverSalle(d.enseignants[index7 - 1], new Date(2017, month, day));
                     break;
                 case 12:
                     System.out.println("Veillez entrer une date");
@@ -162,7 +199,14 @@ public class Main {
                         System.out.println((e + 1) + ")-" + d.salleCours[e].getNumSalle());
                     }
                     int index5 = sc.nextInt();
-                    d.salleCours[index5 - 1].annulerReservation(new Date(2017, month2, day2));
+
+                    System.out.println("Veillez Choissir un prof: ");
+                    for (int e = 0; e < d.enseignants.length; e++) {
+                        System.out.println((e + 1) + ")-" + d.enseignants[e].getNom());
+                    }
+                    int index8 = sc.nextInt();
+
+                    d.salleCours[index5 - 1].annulerReservation(d.enseignants[index8 - 1], new Date(2017, month2, day2));
                     break;
                 case 13:
                     infoDesObjets(d, ecole);

@@ -53,7 +53,6 @@ public class Departement {
         for (int j = 0; j < enseignant.getMatieres().size(); j++) {
             System.out.println("-" + enseignant.getMatieres().get(j).getNom());
         }
-
     }
 
     public void afficherEnseigantsAncienté() {
@@ -68,9 +67,19 @@ public class Departement {
                 if (save[i].getDateDebut() < minYear) {
                     minYear = save[i].getDateDebut();
                     j = i;
+                } else if (save[i].getDateDebut() == minYear) {
+                    if (save[j].getMois() > save[i].getMois()) {
+                        minYear = save[i].getDateDebut();
+                        j = i;
+                    } else if (save[j].getMois() == save[i].getMois()) {
+                        if (save[j].getJour() > save[i].getJour()) {
+                            minYear = save[i].getDateDebut();
+                            j = i;
+                        }
+                    }
                 }
             }
-            System.out.println("-" + save[j].getNom() + " (" + save[j].getDateDebut() + ")");
+            System.out.println("-" + save[j].getNom() + " (" + save[j].getDateDebut() + "/" + save[j].getMois() + "/" + save[j].getJour() + ")");
             save[j].setDateDebut(Integer.MAX_VALUE);
         }
     }

@@ -2,15 +2,35 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Enseignant extends Personne{
+public class Enseignant extends Personne {
     private boolean responsableDepartement;
     private ArrayList<Matiere> matieres;
     private int dateDebut;
+    private int mois;
+    private int jour;
 
-    public Enseignant(String nom, String preNom, String tel, String mail,int dateDebut, String grade) {
+    public Enseignant(String nom, String preNom, String tel, String mail, int dateDebut, int mois, int jour, String grade) {
         super(nom, preNom, tel, mail, grade);
         this.dateDebut = dateDebut;
-        matieres = new ArrayList<>();
+        this.mois = mois;
+        this.jour = jour;
+        this.matieres = new ArrayList<>();
+    }
+
+    public int getMois() {
+        return mois;
+    }
+
+    public void setMois(int mois) {
+        this.mois = mois;
+    }
+
+    public int getJour() {
+        return jour;
+    }
+
+    public void setJour(int jour) {
+        this.jour = jour;
     }
 
     public int getDateDebut() {
@@ -30,8 +50,8 @@ public class Enseignant extends Personne{
         this.matieres.add(matieres);
     }
 
-    public void afficherGrade(){
-        System.out.println("Grade de Mr."+getNom()+" est "+getGrade());
+    public void afficherGrade() {
+        System.out.println("Grade de Mr." + getNom() + " est " + getGrade());
     }
 
     public boolean isResponsableDepartement() {

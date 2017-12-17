@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Matiere {
     private String nom;
     private ArrayList<Enseignant> enseignants;
-    private SalleCours salleCours;
+    public SalleCours salleCours;
     private ArrayList<Etudiant> etudiants;
     private Note note;
 
@@ -14,7 +14,7 @@ public class Matiere {
         this.salleCours = salleCours;
         etudiants = new ArrayList<>();
         enseignants = new ArrayList<>();
-        note = new Note(0);
+        note = null;
     }
 
     public ArrayList<Enseignant> getEnseignants() {
@@ -44,6 +44,7 @@ public class Matiere {
     public void moyenneMatiere() {
         System.out.print("La moyenne de la matiere: " + getNom() + " est: ");
         float s = 0;
+        int d = 0;
         for (int i = 0; i < etudiants.size(); i++) {
             int index = 0;
             for (int j = 0; j < etudiants.get(i).getMatieres().size(); j++) {
@@ -51,13 +52,17 @@ public class Matiere {
                     index = j;
                 }
             }
-            s += etudiants.get(i).getMatieres().get(index).getNote().getNote();
+            if (etudiants.get(i).getMatieres().get(index).getNote() != null) {
+                System.out.println("Etudiant: "+etudiants.get(i).getNom() + " avec la note: "+etudiants.get(i).getMatieres().get(index).getNote().getNote());
+                s += etudiants.get(i).getMatieres().get(index).getNote().getNote();
+                d++;
+            }
         }
-        System.out.println(String.format("%.2f", s / (float) etudiants.size()));
+        System.out.println(String.format("%.2f", s / (float) d));
     }
 
-    public void imprimerFiche(){
-        System.out.println("Fiche Signalitique de la Matiere: "+getNom());
+    public void imprimerFiche() {
+        System.out.println("Fiche Signalitique de la Matiere: " + getNom());
         //System.out.println("Capacité: "+getCapacity());
         //System.out.println("La file d'attente est: "+filsAttente.toString());
     }
