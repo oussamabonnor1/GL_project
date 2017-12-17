@@ -2,6 +2,7 @@ package com.company;
 
 public class Ecole {
     public String nom;
+    public String SiteWeb;
     public Departement[] departements;
 
     public Ecole(String nom, Departement[] departements) {
