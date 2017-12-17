@@ -5,8 +5,9 @@ public class Ecole {
     public String SiteWeb;
     public Departement[] departements;
 
-    public Ecole(String nom, Departement[] departements) {
+    public Ecole(String nom, String SiteWeb, Departement[] departements) {
         this.nom = nom;
+        this.SiteWeb = SiteWeb;
         this.departements = departements;
     }
 
